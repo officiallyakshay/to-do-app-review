@@ -1,0 +1,36 @@
+<html>
+<head>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js'></script>
+  <!-- <script src="index.js"></script> -->
+</head>
+<body>
+  <div id='root'></div>
+  <script type='text/babel'>
+    const { Component } = React;
+    const { render } = ReactDOM;
+    
+    class App extends Component {
+      constructor() {
+        super();
+        this.state = {
+          Prof: [],
+          Thomas: [],
+          Matt: [],
+          Jonathan: []
+        }
+      }
+      render() {
+        return (
+          <hr />
+        );
+      }
+    }
+    render(< App />, root)
+  </script>
+</body>
+</html>
