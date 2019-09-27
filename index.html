@@ -9,7 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js"></script>
   <!-- <script src="index.js"></script> -->
 </head>
-<!-- <style>
+<style>
   body {
     margin: 0;
     font-family: verdana;
@@ -36,26 +36,14 @@
   .container {
     margin: 1rem;
   }
-  
-  @media (max-width: 600px){
-    body {
-      font-size: 2.0rem;
-    }
-    nav {
-      flex-direction: column;
-    }
-    nav a {
-      margin-bottom: 1rem;
-    }
-  }
-</style> -->
+</style>
 <body>
   <div id='root'></div>
   <script type='text/babel'>
 
     const { render } = ReactDOM;
     const { createElement, Component } = React;
-    const { HashRouter, Link, Route, Switch, Redirect } = ReactRouterDOM;
+    const { HashRouter, Link, Route, Switch, Redirect, NavLink } = ReactRouterDOM;
     
     const Prof = ({ prof }) => {
       return (
@@ -98,15 +86,31 @@
     }
 
     const Nav = ({ prof, thomas, matt, jonathan, path }) => {
-      return (
-        <div>
-        <h1>Todos for Cool Dudes</h1>
-          <Link to='/prof' className={path === '/prof' ? 'selected' : ''}>Prof's todos</Link>
-          <Link to='/thomas' className={path === '/thomas' ? 'selected' : ''}>Thomas' todos</Link>
-          <Link to='/matt' className={path === '/matt' ? 'selected' : ''}>Matt's todos</Link>
-          <Link to='/jonathan' className={path === '/jonathan' ? 'selected' : ''}>Jonathan's todos</Link>
-        </div>
-      );
+      // return (
+      //   <div>
+      //   <h1>Todos for Cool Dudes</h1>
+      //     <Link to='/prof' className={path === '/prof' ? 'selected' : ''}>Prof's todos</Link>
+      //     <Link to='/thomas' className={path === '/thomas' ? 'selected' : ''}>Thomas' todos</Link>
+      //     <Link to='/matt' className={path === '/matt' ? 'selected' : ''}>Matt's todos</Link>
+      //     <Link to='/jonathan' className={path === '/jonathan' ? 'selected' : ''}>Jonathan's todos</Link>
+      //   </div>
+      // );
+      const links = [
+          { text: 'Prof', to: '/prof', count: prof.length},
+          { text: 'Thomas', to: '/thomas', count: thomas.length },
+          { text: 'Matt', to: '/matt', count: matt.length },
+          { text: 'Jonathan', to: '/jonathan', count: jonathan.length },
+        ];
+        return (
+          <nav>
+            <h1>Todos for Cool Dudes</h1>
+              <div>
+                {
+                  links.map( link=> <NavLink key={ link.text } to={ link.to }>{ link.text }</NavLink>)
+                }
+              </div>
+          </nav>
+        );
     }
 
     class App extends Component {
@@ -133,17 +137,15 @@
       }
       render() {
         return (
-          <div>
             <HashRouter>
               <Route render = { () => <Nav { ...this.state } /> } />
-                <Switch>
+                <div className='container'>
                   <Route path='/prof' render={()=> <Prof {...this.state}/>} />
                   <Route path='/thomas' render={()=> <Thomas {...this.state}/>} />
                   <Route path='/matt' render={()=> <Matt {...this.state}/>} />
                   <Route path='/jonathan' render={()=> <Jonathan {...this.state}/>} />
-                </Switch>
+                </div>
             </HashRouter>
-          </div>
         );
       }
     }

@@ -47,28 +47,32 @@ const sync = async () => {
   await conn.sync({ force: true });
 
   const prof = [
-    { name: 'teach redux (9/28)' },
-    { name: 'teach thunks (9/30)' },
-    { name: 'assign solo project (10/2)' }
+    { name: 'teach_redux' },
+    { name: 'teach_thunks' },
+    { name: 'assign_solo_project' }
   ];
-
-  const thomas = [
-    { name: 'help akshay' },
-    { name: 'make new ds' },
-    { name: 'look for 300th job' }
+	const [ teach_redux, teach_thunks, assign_solo_project ] = await Promise.all(prof.map( pro => Prof.create(pro)));
+	
+	const thomas = [
+    { name: 'help_akshay' },
+    { name: 'make_new_ds' },
+    { name: 'look_for_300th_job' }
   ];
+  const [ help_akshay, make_new_ds, look_for_300th_job ] = await Promise.all(thomas.map( tom => Thomas.create(tom)));
 
   const matt = [
-    { name: 'work in outdated languages' },
-    { name: 'help everyone' },
-    { name: 'find bugs' }
+    { name: 'work_in_outdated_languages' },
+    { name: 'help_everyone' },
+    { name: 'find_bugs' }
   ];
-   
+  const [ work_in_outdated_languages, help_everyone, find_bugs ] = await Promise.all(matt.map( mat => Matt.create(mat)));
+    
 	const jonathan = [
-    { name: 'help class' },
-    { name: 'work with other cohort' },
-    { name: 'wear cool hats' }
-  ];
+    { name: 'help_class' },
+    { name: 'work_with_other_cohort' },
+    { name: 'wear_cool_hats' }
+	];
+	const [ help_class, work_with_other_cohort, wear_cool_hats ] = await Promise.all(jonathan.map( jon => Jonathan.create(jon)));
 
 };
 
