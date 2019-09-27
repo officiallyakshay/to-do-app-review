@@ -9,6 +9,46 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js"></script>
   <!-- <script src="index.js"></script> -->
 </head>
+<!-- <style>
+  body {
+    margin: 0;
+    font-family: verdana;
+  }
+  nav {
+    background-color: tomato;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  nav a {
+    color: white;
+    border: solid 1px white;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+  }
+  
+  nav a.active {
+    color: tomato;
+    background-color: white;
+  }
+  
+  .container {
+    margin: 1rem;
+  }
+  
+  @media (max-width: 600px){
+    body {
+      font-size: 2.0rem;
+    }
+    nav {
+      flex-direction: column;
+    }
+    nav a {
+      margin-bottom: 1rem;
+    }
+  }
+</style> -->
 <body>
   <div id='root'></div>
   <script type='text/babel'>
@@ -17,10 +57,50 @@
     const { createElement, Component } = React;
     const { HashRouter, Link, Route, Switch, Redirect } = ReactRouterDOM;
     
-    const Nav = ({ path }) => {
+    const Prof = ({ prof }) => {
       return (
-        <h1>Todos for Cool Dudes</h1>
+        <ul>
+          {
+            prof.map(person => <li key={person.id}>{person.name}</li>)
+          }
+        </ul>
+      );
+    }
+    
+    const Thomas = ({ thomas }) => {
+      return (
+        <ul>
+          {
+            thomas.map(person => <li key={person.id}>{person.name}</li>)
+          }
+        </ul>
+      );
+    }
+
+    const Matt = ({ matt }) => {
+      return (
+        <ul>
+          {
+            matt.map(person => <li key={person.id}>{person.name}</li>)
+          }
+        </ul>
+      );
+    }
+
+    const Jonathan = ({ jonathan }) => {
+      return (
+        <ul>
+          {
+            jonathan.map(person => <li key={person.id}>{person.name}</li>)
+          }
+        </ul>
+      );
+    }
+
+    const Nav = ({ prof, thomas, matt, jonathan, path }) => {
+      return (
         <div>
+        <h1>Todos for Cool Dudes</h1>
           <Link to='/prof' className={path === '/prof' ? 'selected' : ''}>Prof's todos</Link>
           <Link to='/thomas' className={path === '/thomas' ? 'selected' : ''}>Thomas' todos</Link>
           <Link to='/matt' className={path === '/matt' ? 'selected' : ''}>Matt's todos</Link>
@@ -33,17 +113,35 @@
       constructor() {
         super();
         this.state = {
-          Prof: [],
-          Thomas: [],
-          Matt: [],
-          Jonathan: []
+          prof: [],
+          thomas: [],
+          matt: [],
+          jonathan: []
         }
+      }
+      async componentDidMount() {
+        const urls = [
+          '/prof',
+          '/thomas',
+          '/matt',
+          '/jonathan'
+        ];
+        const [prof, thomas, matt, jonathan] = await Promise.all(
+          urls.map( url => axios.get(url).then( response => response.data))
+        );
+        this.setState({ prof, thomas, matt, jonathan });
       }
       render() {
         return (
           <div>
             <HashRouter>
-              <Route />
+              <Route render = { () => <Nav { ...this.state } /> } />
+                <Switch>
+                  <Route path='/prof' render={()=> <Prof {...this.state}/>} />
+                  <Route path='/thomas' render={()=> <Thomas {...this.state}/>} />
+                  <Route path='/matt' render={()=> <Matt {...this.state}/>} />
+                  <Route path='/jonathan' render={()=> <Jonathan {...this.state}/>} />
+                </Switch>
             </HashRouter>
           </div>
         );
