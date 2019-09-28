@@ -47,41 +47,73 @@
     
     const Prof = ({ prof }) => {
       return (
-        <ul>
-          {
-            prof.map(person => <li key={person.id}>{person.name}</li>)
-          }
-        </ul>
+        <div>
+          <ul>
+            {
+              prof.map(person => <li key={person.id}>{person.name}<button>Delete</button></li>)
+            }
+          </ul>
+          <div>
+            <form>
+              <input />
+              <button>Add Todo</button>
+            </form>
+          </div>
+        </div>
       );
     }
     
     const Thomas = ({ thomas }) => {
       return (
-        <ul>
-          {
-            thomas.map(person => <li key={person.id}>{person.name}</li>)
-          }
-        </ul>
+        <div>
+          <ul>
+            {
+              thomas.map(person => <li key={person.id}>{person.name}<button>Delete</button></li>)
+            }
+          </ul>
+          <div>
+              <form>
+                <input />
+                <button>Add Todo</button>
+              </form>
+          </div>
+        </div>
       );
     }
 
     const Matt = ({ matt }) => {
       return (
-        <ul>
-          {
-            matt.map(person => <li key={person.id}>{person.name}</li>)
-          }
-        </ul>
+        <div>
+          <ul>
+            {
+              matt.map(person => <li key={person.id}>{person.name}<button>Delete</button></li>)
+            }
+          </ul>
+          <div>
+              <form>
+                <input />
+                <button>Add Todo</button>
+              </form>
+          </div>
+        </div>
       );
     }
 
     const Jonathan = ({ jonathan }) => {
       return (
-        <ul>
-          {
-            jonathan.map(person => <li key={person.id}>{person.name}</li>)
-          }
-        </ul>
+        <div>
+          <ul>
+            {
+              jonathan.map(person => <li key={person.id}>{person.name}<button>Delete</button></li>)
+            }
+          </ul>
+          <div>
+              <form>
+                <input />
+                <button>Add Todo</button>
+              </form>
+          </div>
+        </div>
       );
     }
 
