@@ -45,12 +45,12 @@
     const { createElement, Component } = React;
     const { HashRouter, Link, Route, Switch, Redirect, NavLink } = ReactRouterDOM;
     
-    const Prof = ({ prof }) => {
+    const Prof = ({ prof, destroyProf }) => {
       return (
         <div>
           <ul>
             {
-              prof.map(person => <li key={person.id}>{person.name}<button>Delete</button></li>)
+              prof.map(person => <li key={person.id}>{person.name}<button onClick = { () => destroyProf(person.id) }>Delete</button></li>)
             }
           </ul>
           <div>
@@ -154,6 +154,26 @@
           matt: [],
           jonathan: []
         }
+        this.destroyProf = this.destroyProf.bind(this);
+        this.destroyThomas = this.destroyThomas.bind(this);
+        this.destroyMatt = this.destroyMatt.bind(this);
+        this.destroyJonathan = this.destroyJonathan.bind(this);
+      }
+      async destroyProf(id) {
+        await axios.delete(`/prof/${id}`);
+        this.setState({ prof : this.state.prof.filter( pro => pro.id !== id ) })
+      }
+      async destroyThomas(id) {
+        await axios.delete(`/thomas/${id}`);
+        this.setState({ thomas : this.state.thomas.filter( thom => thom.id !== id ) })
+      }
+      async destroyMatt(id) {
+        await axios.delete(`/matt/${id}`);
+        this.setState({ matt : this.state.matt.filter( mat => mat.id !== id ) })
+      }
+      async destroyJonathan(id) {
+        await axios.delete(`/jonathan/${id}`);
+        this.setState({ jonathan : this.state.jonathan.filter( jon => jon.id !== id ) })
       }
       async componentDidMount() {
         const urls = [
@@ -172,10 +192,10 @@
             <HashRouter>
               <Route render = { () => <Nav { ...this.state } /> } />
                 <div className='container'>
-                  <Route path='/prof' render={()=> <Prof {...this.state}/>} />
-                  <Route path='/thomas' render={()=> <Thomas {...this.state}/>} />
-                  <Route path='/matt' render={()=> <Matt {...this.state}/>} />
-                  <Route path='/jonathan' render={()=> <Jonathan {...this.state}/>} />
+                  <Route path='/prof' render={()=> <Prof {...this.state} destroyProf = { this.destroyProf } />} />
+                  <Route path='/thomas' render={()=> <Thomas {...this.state} destroyThomas = { this.destroyThomas } />} />
+                  <Route path='/matt' render={()=> <Matt {...this.state} destroyMatt = { this.destroyMatt } />} />
+                  <Route path='/jonathan' render={()=> <Jonathan {...this.state} destroyJonathan = { this.destroyJonathan } />} />
                 </div>
             </HashRouter>
         );

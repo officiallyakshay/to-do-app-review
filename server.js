@@ -46,6 +46,50 @@ app.get('/jonathan', async ( req, res, next ) => {
   }
 });
 
+app.post('/prof', async () => {
+  
+});
+
+app.delete('/prof/:id', async ( req, res, next ) => {
+  try {
+    await Prof.destroy({ where: {id: req.params.id} });
+    res.sendStatus(201);
+  }
+  catch(ex) {
+    next(ex);
+  }
+});
+
+app.delete('/thomas/:id', async ( req, res, next ) => {
+  try {
+    await Thomas.destroy({ where: {id: req.params.id} });
+    res.sendStatus(201);
+  }
+  catch(ex) {
+    next(ex);
+  }
+});
+
+app.delete('/matt/:id', async ( req, res, next ) => {
+  try {
+    await Matt.destroy({ where: {id: req.params.id} });
+    res.sendStatus(201);
+  }
+  catch(ex) {
+    next(ex);
+  }
+});
+
+app.delete('/jonathan/:id', async ( req, res, next ) => {
+  try {
+    await Jonathan.destroy({ where: {id: req.params.id} });
+    res.sendStatus(201);
+  }
+  catch(ex) {
+    next(ex);
+  }
+});
+
 db.sync()
   .then(() => {
       app.listen(port, () => console.log(`listening on port ${port}`));
