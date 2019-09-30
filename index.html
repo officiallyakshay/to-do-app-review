@@ -63,12 +63,12 @@
       );
     }
     
-    const Thomas = ({ thomas }) => {
+    const Thomas = ({ thomas, destroyThomas }) => {
       return (
         <div>
           <ul>
             {
-              thomas.map(person => <li key={person.id}>{person.name}<button>Delete</button></li>)
+              thomas.map(person => <li key={person.id}>{person.name}<button onClick = { () => destroyThomas(person.id) }>Delete</button></li>)
             }
           </ul>
           <div>
@@ -81,12 +81,12 @@
       );
     }
 
-    const Matt = ({ matt }) => {
+    const Matt = ({ matt, destroyMatt }) => {
       return (
         <div>
           <ul>
             {
-              matt.map(person => <li key={person.id}>{person.name}<button>Delete</button></li>)
+              matt.map(person => <li key={person.id}>{person.name}<button onClick = { () => destroyMatt(person.id) }>Delete</button></li>)
             }
           </ul>
           <div>
@@ -99,12 +99,12 @@
       );
     }
 
-    const Jonathan = ({ jonathan }) => {
+    const Jonathan = ({ jonathan, destroyJonathan }) => {
       return (
         <div>
           <ul>
             {
-              jonathan.map(person => <li key={person.id}>{person.name}<button>Delete</button></li>)
+              jonathan.map(person => <li key={person.id}>{person.name}<button onClick = { () => destroyJonathan(person.id) }>Delete</button></li>)
             }
           </ul>
           <div>
@@ -129,9 +129,9 @@
       // );
       const links = [
           { text: `Prof (${prof.length})`, to: '/prof' },
-          { text: `Thomas (${prof.length})`, to: '/thomas' },
-          { text: `Matt (${prof.length})`, to: '/matt' },
-          { text: `Jonathan (${prof.length})`, to: '/jonathan' },
+          { text: `Thomas (${thomas.length})`, to: '/thomas' },
+          { text: `Matt (${matt.length})`, to: '/matt' },
+          { text: `Jonathan (${jonathan.length})`, to: '/jonathan' },
         ];
         return (
           <nav>

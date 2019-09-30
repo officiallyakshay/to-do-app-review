@@ -46,9 +46,9 @@ app.get('/jonathan', async ( req, res, next ) => {
   }
 });
 
-app.post('/prof', async () => {
-  
-});
+// app.post('/prof', async () => {
+
+// });
 
 app.delete('/prof/:id', async ( req, res, next ) => {
   try {
